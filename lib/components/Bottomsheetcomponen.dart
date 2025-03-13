@@ -9,7 +9,15 @@ class Bottomsheet extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 40),
-          Padding(padding: const EdgeInsets.all(8.0), child: Customtextfiled()),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Customtextfiled(hint: "Title"),
+                Customtextfiled(hint: "Content", maxlines: 3),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -17,7 +25,9 @@ class Bottomsheet extends StatelessWidget {
 }
 
 class Customtextfiled extends StatelessWidget {
-  const Customtextfiled({super.key});
+  Customtextfiled({required this.hint, this.maxlines = 1});
+  String hint;
+  int maxlines;
 
   @override
   Widget build(BuildContext context) {

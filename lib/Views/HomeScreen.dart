@@ -7,7 +7,6 @@ class homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
         backgroundColor: Colors.blueGrey,
 
         onPressed: () {
