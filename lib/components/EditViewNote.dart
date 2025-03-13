@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notesapp/components/Bottomsheetcomponen.dart';
 
 class Editviewnote extends StatelessWidget {
   const Editviewnote({super.key});
@@ -6,8 +7,14 @@ class Editviewnote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
-    child: Column(),
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          Customtextfiled(hint: "Title"),
+          SizedBox(height: 20),
+          Customtextfiled(hint: "Content", maxlines: 5),
+        ],
+      ),
     );
   }
 }
