@@ -12,8 +12,9 @@ class homescreen extends StatelessWidget {
 
         onPressed: () {
           showModalBottomSheet(
-            
-            
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
             backgroundColor: Colors.grey[900],
             context: context,
             builder: (context) {
