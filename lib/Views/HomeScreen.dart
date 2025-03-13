@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notesapp/Views/EditViewNoted.dart';
 import 'package:notesapp/components/Bottomsheetcomponen.dart';
 import 'package:notesapp/components/ItemBulider.dart';
 
@@ -34,7 +35,19 @@ class homescreen extends StatelessWidget {
           ),
         ],
       ),
-      body: NoteBUlider(),
+      body: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Editviewnotescreen();
+              },
+            ),
+          );
+        },
+        child: NoteBUlider(),
+      ),
     );
   }
 }
