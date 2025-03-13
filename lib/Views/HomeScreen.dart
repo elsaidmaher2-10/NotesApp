@@ -12,9 +12,12 @@ class homescreen extends StatelessWidget {
 
         onPressed: () {
           showModalBottomSheet(
+            
+            
             backgroundColor: Colors.grey[900],
             context: context,
             builder: (context) {
+              // prefering using make stless widgit  extenernal
               return const Bottomsheet();
             },
           );
