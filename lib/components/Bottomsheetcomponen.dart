@@ -57,7 +57,7 @@ class _FromWidgetState extends State<FromWidget> {
                 return null;
               },
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 10),
             CustomButton(
               ontap: () {
                 if (formKey.currentState?.validate() ?? false) {

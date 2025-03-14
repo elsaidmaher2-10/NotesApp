@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:notesapp/Model/NoteModel.dart';
 import 'package:notesapp/Views/HomeScreen.dart';
 
-const Dtabase = "DATA1";
 void main() {
   Hive.initFlutter();
-  Hive.openBox(Dtabase);
+  Hive.registerAdapter(NotemodelAdapter());
+  Hive.openBox("DATA1");
+
   runApp(Notesapp());
 }
 
