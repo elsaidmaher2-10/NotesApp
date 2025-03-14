@@ -1,36 +1,93 @@
 import 'package:flutter/material.dart';
 
-class Bottomsheet extends StatelessWidget {
+class Bottomsheet extends StatefulWidget {
   const Bottomsheet({super.key});
 
   @override
+  State<Bottomsheet> createState() => _BottomsheetState();
+}
+
+class _BottomsheetState extends State<Bottomsheet> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        children: [
-          SizedBox(height: 40),
+    return FromWidget();
+  }
+}
 
-          Customtextfiled(hint: "Title"),
+class FromWidget extends StatefulWidget {
+  @override
+  _FromWidgetState createState() => _FromWidgetState();
+}
 
-          SizedBox(height: 20),
-          Customtextfiled(hint: "Content", maxlines: 5, y: 0),
-          SizedBox(height: 150),
-          CustomButton(),
-        ],
+class _FromWidgetState extends State<FromWidget> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? title;
+  String? subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      autovalidateMode: autovalidateMode,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            SizedBox(height: 40),
+            Customtextfiled(
+              hint: "Title",
+              validator: (p) {
+                if (p == null || p.isEmpty) {
+                  return "هذا الحقل مطلوب";
+                }
+                title = p;
+                return null;
+              },
+            ),
+            SizedBox(height: 20),
+            Customtextfiled(
+              hint: "Content",
+              maxlines: 5,
+              validator: (p) {
+                if (p == null || p.isEmpty) {
+                  return "هذا الحقل مطلوب";
+                }
+                subtitle = p;
+                return null;
+              },
+            ),
+            SizedBox(height: 50),
+            CustomButton(
+              ontap: () {
+                if (formKey.currentState?.validate() ?? false) {
+                  formKey.currentState!.save();
+                  print("تم الحفظ بنجاح: العنوان: $title، المحتوى: $subtitle");
+                } else {
+                  setState(() {
+                    autovalidateMode = AutovalidateMode.always;
+                  });
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 class Customtextfiled extends StatelessWidget {
-  Customtextfiled({required this.hint, this.maxlines = 1, this.y = 0});
-  String hint;
-  int maxlines;
-  double y;
+  Customtextfiled({required this.hint, this.maxlines = 1, this.validator});
+
+  final String hint;
+  final int maxlines;
+  final String? Function(String?)? validator;
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       style: TextStyle(color: Colors.white),
       maxLines: maxlines,
       cursorColor: Colors.white,
@@ -49,7 +106,9 @@ class Customtextfiled extends StatelessWidget {
 }
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
+  const CustomButton({required this.ontap});
+
+  final VoidCallback ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +124,7 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        onPressed: () {},
+        onPressed: ontap,
         child: Text(
           "SAVE",
           style: TextStyle(
